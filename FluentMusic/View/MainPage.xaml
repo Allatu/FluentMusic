@@ -1,0 +1,39 @@
+﻿<Page
+    x:Class="FluentMusic.View.MainPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:FluentMusic"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    xmlns:muxc="using:Microsoft.UI.Xaml.Controls"
+    xmlns:classes="using:FluentMusic.Classes"
+    xmlns:s="using:Windows.System"
+    xmlns:model="using:FluentMusic.Model"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+
+    <Page.Resources>
+        <DataTemplate x:Key="ViewModelTemplate" x:DataType="classes:ViewModelBase">
+            <muxc:NavigationViewItem
+                Content="{x:Bind Header}"
+                ToolTipService.ToolTip="{x:Bind Tooltip}">
+                <muxc:NavigationViewItem.Icon>
+                    <SymbolIcon Symbol="{x:Bind Symbol}" />
+                </muxc:NavigationViewItem.Icon>
+            </muxc:NavigationViewItem>
+        </DataTemplate>
+    </Page.Resources>
+
+    
+    <Grid>
+        <muxc:NavigationView x:Name="NavigationView" 
+                             SelectionChanged="NavigationView_OnSelectionChanged"
+                             PaneDisplayMode="Auto"
+                             MenuItemTemplate="{StaticResource ViewModelTemplate}"
+                             MenuItemsSource="{x:Bind ViewModel.Pages, Mode=OneWay}"
+                             IsTabStop="False">
+            
+            <Frame x:Name="ContentFrame" />
+        </muxc:NavigationView>
+    </Grid>
+</Page>
